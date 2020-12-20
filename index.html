@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+
+<script>
+
+if (!Date.prototype.toISOString) {
+  (function() {
+
+    function pad(number) {
+      if (number < 10) {
+        return '0' + number;
+      }
+      return number;
+    }
+
+    Date.prototype.toISOString = function() {
+      return this.getUTCFullYear() +
+        '-' + pad(this.getUTCMonth() + 1) +
+        '-' + pad(this.getUTCDate()) +
+        'T' + pad(this.getUTCHours()) +
+        ':' + pad(this.getUTCMinutes()) +
+        ':' + pad(this.getUTCSeconds()) +
+        '.' + (this.getUTCMilliseconds() / 1000).toFixed(3).slice(2, 5) +
+        'Z';
+    };
+
+  })();
+}
+
+
+
+document.onkeypress = function(e) {
+	e = e || window.event;
+
+
+	var d = new Date()
+
+	console.log(d.toISOString());
+
+	var node = document.getElementById("nya");
+	var textnode = document.createTextNode(d.toISOString());
+	node.appendChild(textnode);
+	var textbr = document.createElement("br");
+	node.appendChild(textbr);
+	
+}
+
+
+</script>
+
+</head>
+<body>
+<h1>Press enter to add current timestamp</h1>
+<div id="nya">
+</div>
+
+
+</body>
+
+
+</html>
